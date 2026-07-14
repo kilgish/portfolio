@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prince Dwivedi — Software Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#10141a;
+    --bg-alt:#171c24;
+    --bg-raised:#1d232d;
+    --text-primary:#ece9e1;
+    --text-secondary:#8b93a1;
+    --text-muted:#5a6270;
+    --accent-teal:#4fb8ae;
+    --accent-amber:#e8a33d;
+    --border:#262c36;
+    --mono:'IBM Plex Mono', monospace;
+    --sans:'IBM Plex Sans', sans-serif;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text-primary);
+    font-family:var(--sans);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--accent-teal); text-decoration:none;}
+  a:hover{text-decoration:underline;}
+  ::selection{background:var(--accent-teal); color:var(--bg);}
+
+  .wrap{max-width:920px; margin:0 auto; padding:0 24px;}
+
+  /* NAV */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(16,20,26,0.9);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--border);
+  }
+  nav .wrap{display:flex; align-items:center; justify-content:space-between; height:56px;}
+  .logo{font-family:var(--mono); font-size:14px; color:var(--text-primary); font-weight:500;}
+  .logo span{color:var(--accent-teal);}
+  .navlinks{display:flex; gap:24px; font-family:var(--mono); font-size:13px;}
+  .navlinks a{color:var(--text-secondary);}
+  .navlinks a:hover{color:var(--accent-teal); text-decoration:none;}
+
+  /* HERO / TERMINAL */
+  .hero{padding:72px 0 56px;}
+  .terminal{
+    background:var(--bg-alt);
+    border:1px solid var(--border);
+    border-radius:8px;
+    overflow:hidden;
+  }
+  .term-bar{
+    display:flex; align-items:center; gap:8px;
+    padding:10px 14px;
+    background:var(--bg-raised);
+    border-bottom:1px solid var(--border);
+  }
+  .term-dot{width:10px; height:10px; border-radius:50%;}
+  .term-bar span:nth-child(1){background:#e8695f;}
+  .term-bar span:nth-child(2){background:#e8b93d;}
+  .term-bar span:nth-child(3){background:#4fb86e;}
+  .term-title{
+    margin-left:8px; font-family:var(--mono); font-size:12px; color:var(--text-muted);
+  }
+  .term-body{
+    padding:24px 24px 32px;
+    font-family:var(--mono); font-size:14px;
+  }
+  .term-line{color:var(--text-secondary); margin-bottom:6px;}
+  .term-prompt{color:var(--accent-teal);}
+  .term-output{color:var(--text-primary); margin:2px 0 18px;}
+  .type-name{
+    font-size:32px; font-weight:600; color:var(--text-primary);
+    border-right:2px solid var(--accent-amber);
+    white-space:nowrap; overflow:hidden; display:inline-block;
+    width:0; animation:type 1.1s steps(14,end) 0.3s forwards, blink 0.8s step-end infinite;
+  }
+  @keyframes type{ to{ width:14ch; } }
+  @keyframes blink{ 50%{ border-color:transparent; } }
+  .role-line{
+    font-size:15px; color:var(--text-secondary); margin-top:10px;
+    opacity:0; animation:fadein 0.6s ease 1.5s forwards;
+  }
+  .role-line .accent{color:var(--accent-amber);}
+  .term-stats{
+    display:flex; gap:28px; margin-top:20px; flex-wrap:wrap;
+    opacity:0; animation:fadein 0.6s ease 1.9s forwards;
+  }
+  .stat{font-size:12px; color:var(--text-muted);}
+  .stat b{display:block; font-size:18px; color:var(--accent-teal); font-weight:500;}
+  @keyframes fadein{ to{ opacity:1; } }
+
+  section{padding:48px 0;}
+  .section-label{
+    font-family:var(--mono); font-size:12px; color:var(--accent-amber);
+    letter-spacing:0.06em; margin-bottom:6px;
+  }
+  .section-title{
+    font-size:22px; font-weight:600; margin-bottom:24px; color:var(--text-primary);
+  }
+
+  /* ABOUT */
+  .about-grid{display:grid; grid-template-columns:1fr; gap:24px;}
+  .about-text{color:var(--text-secondary); font-size:15px; max-width:640px;}
+  .about-text strong{color:var(--text-primary); font-weight:500;}
+
+  /* SKILLS - styled like import statements */
+  .import-block{
+    background:var(--bg-alt); border:1px solid var(--border); border-radius:8px;
+    padding:20px 24px; font-family:var(--mono); font-size:13.5px;
+  }
+  .import-block .kw{color:var(--accent-amber);}
+  .import-block .mod{color:var(--accent-teal);}
+  .import-block .cm{color:var(--text-muted);}
+  .import-block div{padding:3px 0;}
+
+  /* PROJECTS */
+  .project-grid{display:grid; grid-template-columns:1fr; gap:16px;}
+  .project-card{
+    background:var(--bg-alt); border:1px solid var(--border); border-radius:8px;
+    padding:22px 24px; transition:border-color 0.2s;
+  }
+  .project-card:hover{border-color:var(--accent-teal);}
+  .project-head{display:flex; align-items:baseline; justify-content:space-between; gap:12px; flex-wrap:wrap;}
+  .project-name{font-family:var(--mono); font-size:15px; font-weight:600; color:var(--text-primary);}
+  .project-stack{font-family:var(--mono); font-size:11px; color:var(--accent-teal);}
+  .project-desc{color:var(--text-secondary); font-size:14px; margin-top:10px;}
+
+  /* ACHIEVEMENTS - commit log style */
+  .log{border-left:1px solid var(--border); margin-left:6px; padding-left:24px;}
+  .log-item{position:relative; padding-bottom:22px;}
+  .log-item::before{
+    content:''; position:absolute; left:-29px; top:5px;
+    width:9px; height:9px; border-radius:50%;
+    background:var(--bg); border:2px solid var(--accent-amber);
+  }
+  .log-hash{font-family:var(--mono); font-size:11px; color:var(--text-muted);}
+  .log-msg{font-size:14.5px; color:var(--text-primary); margin-top:2px;}
+
+  /* EDUCATION */
+  .edu-row{
+    display:flex; justify-content:space-between; align-items:baseline;
+    flex-wrap:wrap; gap:6px;
+    font-size:14.5px; color:var(--text-secondary);
+  }
+  .edu-row b{color:var(--text-primary); font-weight:500;}
+
+  /* CONTACT / FOOTER */
+  footer{
+    border-top:1px solid var(--border); padding:40px 0 48px;
+  }
+  .contact-term{font-family:var(--mono); font-size:14px;}
+  .contact-term .term-prompt{color:var(--accent-teal);}
+  .contact-list{margin-top:16px; display:flex; flex-direction:column; gap:8px; font-family:var(--mono); font-size:13.5px;}
+  .contact-list a{color:var(--text-primary);}
+  .contact-list a:hover{color:var(--accent-teal);}
+  .contact-list .k{color:var(--text-muted); display:inline-block; width:80px;}
+  .foot-note{margin-top:28px; font-size:12px; color:var(--text-muted); font-family:var(--mono);}
+
+  @media (max-width:600px){
+    .navlinks{gap:14px; font-size:11.5px;}
+    .type-name{font-size:24px;}
+    .term-stats{gap:18px;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="logo">~/<span>prince</span></div>
+    <div class="navlinks">
+      <a href="#about">about</a>
+      <a href="#skills">skills</a>
+      <a href="#projects">projects</a>
+      <a href="#achievements">log</a>
+      <a href="#contact">contact</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="terminal">
+      <div class="term-bar">
+        <span class="term-dot"></span><span class="term-dot"></span><span class="term-dot"></span>
+        <span class="term-title">prince@devbox: ~</span>
+      </div>
+      <div class="term-body">
+        <div class="term-line"><span class="term-prompt">$</span> whoami</div>
+        <div class="type-name">Prince Dwivedi</div>
+        <div class="role-line">Computer Science undergrad — <span class="accent">Python</span> · <span class="accent">Django</span> · <span class="accent">Machine Learning</span></div>
+        <div class="term-stats">
+          <div class="stat">CGPA<b>7.01</b></div>
+          <div class="stat">CodeVita rank<b>12,753</b></div>
+          <div class="stat">Grad year<b>2026</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section id="about">
+    <div class="section-label">// about</div>
+    <div class="section-title">A bit about me</div>
+    <div class="about-grid">
+      <p class="about-text">
+        I'm a final-year <strong>B.Tech CSE student</strong> at RR Institute of Technology, Bengaluru, focused on building practical software — from <strong>Django web apps</strong> to <strong>machine learning models</strong> that solve real problems. I like breaking problems down with data structures and algorithms first, then shipping something that actually works. Currently looking for an entry-level Software Developer role where I can keep learning from experienced engineers while contributing to real products.
+      </p>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="section-label">// stack</div>
+    <div class="section-title">Skills</div>
+    <div class="import-block">
+      <div><span class="kw">from</span> languages <span class="kw">import</span> <span class="mod">Python, C++</span></div>
+      <div><span class="kw">from</span> web <span class="kw">import</span> <span class="mod">Django, HTML, CSS, React.js</span></div>
+      <div><span class="kw">from</span> data <span class="kw">import</span> <span class="mod">NumPy, Pandas, Scikit-learn, Jupyter</span></div>
+      <div><span class="kw">from</span> database <span class="kw">import</span> <span class="mod">SQL</span></div>
+      <div><span class="kw">from</span> tools <span class="kw">import</span> <span class="mod">Git</span></div>
+      <div><span class="kw">from</span> fundamentals <span class="kw">import</span> <span class="mod">DSA, DBMS, OS, CN, OOPS</span> <span class="cm"># core CS</span></div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="section-label">// projects</div>
+    <div class="section-title">Things I've built</div>
+    <div class="project-grid">
+      <div class="project-card">
+        <div class="project-head">
+          <div class="project-name">student-performance-predictor</div>
+          <div class="project-stack">Python · Flask · Scikit-learn</div>
+        </div>
+        <p class="project-desc">
+          ML system that predicts students' academic performance from demographic, academic, and behavioral data. Built Logistic and Linear Regression models for pass/fail and final-grade prediction, evaluated with accuracy, precision, recall, F1, MAE, and R². Wrapped it in a Flask web app with real-time predictions and interactive visualizations.
+        </p>
+      </div>
+      <div class="project-card">
+        <div class="project-head">
+          <div class="project-name">social-network-recommender</div>
+          <div class="project-stack">Python · JSON</div>
+        </div>
+        <p class="project-desc">
+          Recommendation system suggesting "People You May Know" via mutual-friend analysis and page suggestions based on shared interests, with a custom data preprocessing and validation pipeline.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="achievements">
+    <div class="section-label">// git log</div>
+    <div class="section-title">Achievements & leadership</div>
+    <div class="log">
+      <div class="log-item">
+        <div class="log-hash">2024</div>
+        <div class="log-msg">Global Rank 12,753 — TCS CodeVita Season 13, an international competitive programming contest.</div>
+      </div>
+      <div class="log-item">
+        <div class="log-hash">2024</div>
+        <div class="log-msg">2nd Prize, Speech Event — Fuelling Innovation 2K24, RR Institute of Technology.</div>
+      </div>
+      <div class="log-item">
+        <div class="log-hash">2024</div>
+        <div class="log-msg">Led a 4-member team building the student-performance ML system — coordinated task allocation and delivery.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="section-label">// education</div>
+    <div class="section-title">Education</div>
+    <div class="edu-row">
+      <span><b>RR Institute of Technology</b>, Bengaluru — B.Tech, Computer Science Engineering</span>
+      <span>2022 – 2026</span>
+    </div>
+  </section>
+</div>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="contact-term"><span class="term-prompt">$</span> contact --prince</div>
+    <div class="contact-list">
+      <div><span class="k">email</span><a href="mailto:princedwivedi1605@gmail.com">princedwivedi1605@gmail.com</a></div>
+      <div><span class="k">phone</span><span>+91 6289478817</span></div>
+      <div><span class="k">location</span><span>Bengaluru, Karnataka</span></div>
+      <div><span class="k">github</span><a href="#">github.com/your-username</a></div>
+      <div><span class="k">leetcode</span><a href="#">leetcode.com/your-username</a></div>
+    </div>
+    <div class="foot-note">// update the github and leetcode links above with your actual profile URLs</div>
+  </div>
+</footer>
+
+</body>
+</html>
